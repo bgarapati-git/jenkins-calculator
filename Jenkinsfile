@@ -1,22 +1,22 @@
 pipeline{
 	agent any
 	stages{
-		stage('preparation'){
+		stage('build and test'){
 			steps{
-				bat "mvn clean"
+				bat "mvn clean install"
 			}
 		}
-		stage('package'){
+		stage('publish test results'){
 			steps{
-				bat "mvn package"
+				junit '**/target/surefire-reports/TEST-*.xml'
+				archiveArtifacts 'target/*.jar'
 			}
-			post {
-				always {
-					junit '**/target/surefire-reports/TEST-*.xml'
-					archiveArtifacts 'target/*.jar'
-				}
-			}			
 		}
+		stage('docker package'){
+			steps{
+				echo "create docker image"
+			}
+		}		
 		
 	}
 }
