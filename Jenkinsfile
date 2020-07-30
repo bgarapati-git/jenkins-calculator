@@ -3,13 +3,7 @@ pipeline{
 	stages{
 		stage('preparation'){
 			steps{
-				//git 'https://github.com/bgarapati-git/jenkins-calculator.git'
-				echo "preparation step started and completed"
-			}
-		}
-		stage('build'){
-			steps{
-				bat "mvn clean test"
+				bat "mvn clean"
 			}
 		}
 		stage('package'){
