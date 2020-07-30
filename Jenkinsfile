@@ -16,6 +16,11 @@ pipeline{
 			steps{
 				echo "create docker image"
 			}
+		}	
+		stage('Deploy container in Kubernetes'){
+			steps{
+				echo "deploy in kubernetes"
+			}
 		}		
 		
 	}
