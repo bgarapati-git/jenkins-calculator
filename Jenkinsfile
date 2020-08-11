@@ -3,6 +3,8 @@ pipeline{
 	stages{
 		stage('build and test'){
 			steps{
+				bat 'echo %PATH%'
+				bat 'echo %MAVEN_HOME%'
 				bat "mvn clean install"
 			}
 		}
