@@ -13,8 +13,16 @@ pipeline{
 			}
 		}
 		stage('docker package'){
+			environment{
+			    registry = "bgrapati/jenkins-calculator"
+				registryCredential = ‘dockerhub’
+				dockerImage = ''
+			}
 			steps{
-				echo "create docker image"
+				script {
+					dockerImage = docker.build registry + ":$BUILD_NUMBER"	
+					echo dockerImage
+				}
 			}
 		}	
 		stage('Deploy container in Kubernetes'){
