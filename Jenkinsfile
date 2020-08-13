@@ -15,8 +15,8 @@ pipeline{
 		stage('docker package'){
 			environment{
 			    registry = "bgrapati/jenkins-calculator"
-				registryCredential = ‘dockerhub’
-				dockerImage = ''
+			    registryCredential = "dockerhub"
+			    dockerImage = ""
 			}
 			steps{
 				script {
