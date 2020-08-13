@@ -19,9 +19,7 @@ pipeline{
 			    dockerImage = ""
 			}
 			steps{
-				script {
-						
-				}
+				echo "docker package"
 			}
 		}	
 	
