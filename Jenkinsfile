@@ -25,11 +25,7 @@ pipeline{
 				echo dockerImage
 			}
 		}	
-		stage('Deploy container in Kubernetes'){
-			steps{
-				echo "deploy in kubernetes"
-			}
-		}		
+	
 		
 	}
 }
