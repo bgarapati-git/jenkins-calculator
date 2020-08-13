@@ -19,7 +19,7 @@ pipeline{
 			    dockerImage = ""
 			}
 			steps{
-				bat "docker build -t jenkins-calculator:$BUILD_NUMBER -f Dockerfile.file"
+				bat "docker build -t jenkins-calculator:$BUILD_NUMBER -f Dockerfile"
 				echo "docker package"
 			}
 		}	
