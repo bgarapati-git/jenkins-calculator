@@ -23,7 +23,7 @@ pipeline{
 						USERNAME= '$USER_NAME'
 					}
 				}
-				echo "login success ${USERNAME"}"
+				echo "login success $USERNAME"
 				
 				bat "docker build -t $USERNAME/jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
 				success {
