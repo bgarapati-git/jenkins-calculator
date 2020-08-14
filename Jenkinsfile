@@ -13,14 +13,15 @@ pipeline{
 			}
 		}
 		stage('docker package'){
-			environment{
-			    registry = "bgrapati/jenkins-calculator"
-			    registryCredential = "dockerhub"
-			    dockerImage = ""
+			withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+			    bat "docker login -u $USER_NAME -p $PASSWORD"
 			}
 			steps{
-				bat "docker build -t jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
-				echo "docker package"
+				bat "docker build -t $USER_NAME/jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
+				success {
+					echo "docker build succeeded"
+					bat "docker push"
+				}
 			}
 		}	
 	
