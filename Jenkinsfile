@@ -1,5 +1,8 @@
 pipeline{
 	agent any
+	environment{
+		USER_INFO = "TEST USER"
+	}
 	stages{
 		stage('build and test'){
 			steps{
@@ -23,11 +26,13 @@ pipeline{
 				script{
 					withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USRNAME')]) {
 						bat "docker login -u $USRNAME -p $PASSWORD"
-						def USER_ID = '${USRNAME}'
+						USER_INFO = '${USRNAME}'
+						env.USER_INFO = USER_INFO + " dfsfd"
 					}
 				}
 				
-				echo "login success ${USER_ID}"
+				echo "login success ${USER_INFO}"
+				echo "login success ${env.USER_INFO}"
 				
 				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
 				echo "docker build succeeded"
