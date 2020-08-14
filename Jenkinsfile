@@ -26,7 +26,7 @@ pipeline{
 				script{
 					withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USRNAME')]) {
 						bat "docker login -u $USRNAME -p $PASSWORD"
-						USER_INFO = '${USRNAME}'
+						USER_INFO = "${USRNAME}"
 						env.USER_INFO = USER_INFO + " dfsfd"
 					}
 				}
