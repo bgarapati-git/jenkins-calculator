@@ -4,12 +4,14 @@ pipeline{
 		stage('build and test'){
 			steps{
 				//bat "mvn clean install"
+				echo "build"
 			}
 		}
 		stage('publish test results'){
 			steps{
 				//junit '**/target/surefire-reports/TEST-*.xml'
 				//archiveArtifacts 'target/*.jar'
+				echo "Results published"
 			}
 		}
 		stage('docker package'){
