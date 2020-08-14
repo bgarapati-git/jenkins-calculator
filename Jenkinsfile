@@ -6,14 +6,14 @@ pipeline{
 	stages{
 		stage('build and test'){
 			steps{
-				//bat "mvn clean install"
+				bat "mvn clean install"
 				echo "build"
 			}
 		}
 		stage('publish test results'){
 			steps{
-				//junit '**/target/surefire-reports/TEST-*.xml'
-				//archiveArtifacts 'target/*.jar'
+				junit '**/target/surefire-reports/TEST-*.xml'
+				archiveArtifacts 'target/*.jar'
 				echo "Results published"
 			}
 		}
