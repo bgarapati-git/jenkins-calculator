@@ -3,25 +3,25 @@ pipeline{
 	stages{
 		stage('build and test'){
 			steps{
-				bat "mvn clean install"
+				//bat "mvn clean install"
 			}
 		}
 		stage('publish test results'){
 			steps{
-				junit '**/target/surefire-reports/TEST-*.xml'
-				archiveArtifacts 'target/*.jar'
+				//junit '**/target/surefire-reports/TEST-*.xml'
+				//archiveArtifacts 'target/*.jar'
 			}
 		}
 		stage('docker package'){
 			environment{
-				def USERNAME = ""
+				USERNAME = ""
 			}
 			
 			steps{
 				script{
 					withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
 					    bat "docker login -u $USER_NAME -p $PASSWORD"
-						$USERNAME = '${USER_NAME}'
+						$USERNAME = "$USER_NAME"
 					}
 				}
 				echo "login success"
