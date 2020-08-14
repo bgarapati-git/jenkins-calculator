@@ -37,6 +37,7 @@ pipeline{
 				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
 				echo "docker build succeeded"
 				bat "docker push $dockerRepositoryUrl:$BUILD_NUMBER"
+				bat "docker rmi $dockerRepositoryUrl:$BUILD_NUMBER"
 			}
 		}	
 	
