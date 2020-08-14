@@ -23,15 +23,15 @@ pipeline{
 				script{
 					withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USRNAME')]) {
 						bat "docker login -u $USRNAME -p $PASSWORD"
-						def USERNAME = '${USRNAME}'
+						def USER_ID = '${USRNAME}'
 					}
 				}
 				
-				echo "login success ${USERNAME}"
+				echo "login success ${USER_ID}"
 				
 				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
 				echo "docker build succeeded"
-				bat "docker push latest"
+				bat "docker push $dockerRepositoryUrl:$BUILD_NUMBER"
 			}
 		}	
 	
