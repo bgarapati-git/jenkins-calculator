@@ -15,9 +15,6 @@ pipeline{
 			}
 		}
 		stage('docker package'){
-			script{
-				USERNAME = ""
-			}
 			
 			steps{
 				script{
@@ -26,7 +23,7 @@ pipeline{
 						USERNAME= '$USER_NAME'
 					}
 				}
-				echo "login success"
+				echo "login success ${USERNAME"}"
 				
 				bat "docker build -t $USERNAME/jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
 				success {
