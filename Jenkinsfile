@@ -13,8 +13,10 @@ pipeline{
 			}
 		}
 		stage('docker package'){
-			withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
-			    bat "docker login -u $USER_NAME -p $PASSWORD"
+			script{
+				withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
+				    bat "docker login -u $USER_NAME -p $PASSWORD"
+				}
 			}
 			steps{
 				bat "docker build -t $USER_NAME/jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
