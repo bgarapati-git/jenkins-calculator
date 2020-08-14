@@ -15,6 +15,9 @@ pipeline{
 			}
 		}
 		stage('docker package'){
+			environment{
+				dockerRepositoryUrl = "bgrapati/jenkins-calculator"
+			}
 			
 			steps{
 				script{
@@ -26,7 +29,7 @@ pipeline{
 				}
 				echo "login success ${USERNAME}"
 				
-				bat "docker build -t $USERNAME/jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
+				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
 				success {
 					echo "docker build succeeded"
 					bat "docker push"
