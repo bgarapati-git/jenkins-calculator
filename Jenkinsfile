@@ -30,10 +30,8 @@ pipeline{
 				echo "login success ${USERNAME}"
 				
 				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
-				success {
-					echo "docker build succeeded"
-					bat "docker push"
-				}
+				echo "docker build succeeded"
+				bat "docker push"
 			}
 		}	
 	
