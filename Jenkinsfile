@@ -13,16 +13,20 @@ pipeline{
 			}
 		}
 		stage('docker package'){
-
+			environment{
+				def USERNAME = ""
+			}
+			
 			steps{
 				script{
 					withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USER_NAME')]) {
 					    bat "docker login -u $USER_NAME -p $PASSWORD"
+					    $USERNAME = $USER_NAME
 					}
 				}
 				echo "login success"
 				
-				bat "docker build -t $USER_NAME/jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
+				bat "docker build -t $USERNAME/jenkins-calculator:$BUILD_NUMBER -f Dockerfile ."
 				success {
 					echo "docker build succeeded"
 					bat "docker push"
