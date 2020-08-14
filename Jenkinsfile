@@ -19,6 +19,7 @@ pipeline{
 			steps{
 				script{
 					withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'PASSWORD', usernameVariable: 'USRNAME')]) {
+						echo "$USRNAME"
 						bat "docker login -u $USRNAME -p $PASSWORD"
 						def USERNAME= '${USRNAME}'
 					}
