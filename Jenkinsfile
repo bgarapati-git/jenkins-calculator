@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	environment{
-		USER_INFO = "TEST USER"
+		USER_INFO = ""
 	}
 	stages{
 		stage('build and test'){
