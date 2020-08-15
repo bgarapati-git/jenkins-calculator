@@ -1,20 +1,20 @@
 pipeline{
 	agent any
 	environment{
-		USER_INFO = ""
+		USER_INFO = "environment variable"
 	}
 	stages{
 		stage('build and test'){
 			steps{
 				bat "mvn clean install"
-				echo "build"
+				echo "build success"
 			}
-		}
-		stage('publish test results'){
-			steps{
-				junit '**/target/surefire-reports/TEST-*.xml'
-				archiveArtifacts 'target/*.jar'
-				echo "Results published"
+			post{
+				success{
+					junit '**/target/surefire-reports/TEST-*.xml'
+					archiveArtifacts 'target/*.jar'
+					echo "Results published"				
+				}
 			}
 		}
 		stage('docker package'){
@@ -35,12 +35,15 @@ pipeline{
 				echo "login success ${env.USER_INFO}"
 				
 				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
-				echo "docker build succeeded"
 				bat "docker push $dockerRepositoryUrl:$BUILD_NUMBER"
 				bat "docker rmi $dockerRepositoryUrl:$BUILD_NUMBER"
 			}
 		}	
+		stage('deploy application'){
+			steps{
+				bat "kubectl run "
+			}
+		}
 	
-		
 	}
 }
