@@ -41,6 +41,7 @@ pipeline{
 		}	
 		stage('deploy application'){
 			steps{
+				bat "kubectl config view"
 				bat "kubectl create -f jenkins-calculator_pod.yaml"
 			}
 		}
