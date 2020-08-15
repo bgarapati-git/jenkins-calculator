@@ -44,7 +44,6 @@ pipeline{
 				bat "kubectl config view"
 				bat "kubectl create -f jenkins-calculator_pod.yaml"
 				bat "kubectl apply -f jenkins-calculator-nodeport-service.yaml"
-				bat "minikube service jenkins-calc-service --url"
 			}
 		}
 	
