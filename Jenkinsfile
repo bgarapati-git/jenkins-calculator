@@ -36,7 +36,7 @@ pipeline{
 				
 				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -t $dockerRepositoryUrl:latest -f Dockerfile ."
 				bat "docker push $dockerRepositoryUrl"
-				bat "docker rmi $dockerRepositoryUrl"
+				bat "docker rmi $dockerRepositoryUrl $dockerRepositoryUrl:$BUILD_NUMBER"
 			}
 		}	
 		stage('deploy application'){
