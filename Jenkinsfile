@@ -6,13 +6,13 @@ pipeline{
 	stages{
 		stage('build and test'){
 			steps{
-				//bat "mvn clean install"
+				bat "mvn clean install"
 				echo "build success"
 			}
 			post{
 				success{
-					//junit '**/target/surefire-reports/TEST-*.xml'
-					//archiveArtifacts 'target/*.jar'
+					junit '**/target/surefire-reports/TEST-*.xml'
+					archiveArtifacts 'target/*.jar'
 					echo "Results published"				
 				}
 			}
@@ -42,7 +42,7 @@ pipeline{
 		stage('deploy application'){
 			steps{
 				bat "kubectl config view"
-				//bat "kubectl create -f jenkins-calculator_pod.yaml"
+				bat "kubectl create -f jenkins-calculator_pod.yaml"
 			}
 		}
 	
