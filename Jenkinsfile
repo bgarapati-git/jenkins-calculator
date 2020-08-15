@@ -34,15 +34,15 @@ pipeline{
 				echo "login success ${USER_INFO}"
 				echo "login success ${env.USER_INFO}"
 				
-				//bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
-				//bat "docker push $dockerRepositoryUrl:$BUILD_NUMBER"
-				//bat "docker rmi $dockerRepositoryUrl:$BUILD_NUMBER"
+				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
+				bat "docker push $dockerRepositoryUrl:$BUILD_NUMBER $dockerRepositoryUrl:latest"
+				bat "docker rmi $dockerRepositoryUrl:$latest"
 			}
 		}	
 		stage('deploy application'){
 			steps{
 				bat "kubectl config view"
-				bat "kubectl create -f jenkins-calculator_pod.yaml"
+				//bat "kubectl create -f jenkins-calculator_pod.yaml"
 			}
 		}
 	
