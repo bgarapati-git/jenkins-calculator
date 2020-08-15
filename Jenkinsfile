@@ -6,13 +6,13 @@ pipeline{
 	stages{
 		stage('build and test'){
 			steps{
-				bat "mvn clean install"
+				//bat "mvn clean install"
 				echo "build success"
 			}
 			post{
 				success{
-					junit '**/target/surefire-reports/TEST-*.xml'
-					archiveArtifacts 'target/*.jar'
+					//junit '**/target/surefire-reports/TEST-*.xml'
+					//archiveArtifacts 'target/*.jar'
 					echo "Results published"				
 				}
 			}
@@ -34,9 +34,9 @@ pipeline{
 				echo "login success ${USER_INFO}"
 				echo "login success ${env.USER_INFO}"
 				
-				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
-				bat "docker push $dockerRepositoryUrl:$BUILD_NUMBER"
-				bat "docker rmi $dockerRepositoryUrl:$BUILD_NUMBER"
+				//bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
+				//bat "docker push $dockerRepositoryUrl:$BUILD_NUMBER"
+				//bat "docker rmi $dockerRepositoryUrl:$BUILD_NUMBER"
 			}
 		}	
 		stage('deploy application'){
