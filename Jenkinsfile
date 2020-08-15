@@ -35,7 +35,7 @@ pipeline{
 				echo "login success ${env.USER_INFO}"
 				
 				bat "docker build -t $dockerRepositoryUrl:$BUILD_NUMBER -f Dockerfile ."
-				bat "docker tag $dockerRepositoryUrl:$BUILD_NUMBER $dockerRepositoryUrl:latest
+				bat "docker tag $dockerRepositoryUrl:$BUILD_NUMBER $dockerRepositoryUrl:latest"
 				bat "docker push $dockerRepositoryUrl:latest"
 				bat "docker rmi $dockerRepositoryUrl:$BUILD_NUMBER $dockerRepositoryUrl:latest"
 			}
