@@ -7,4 +7,4 @@ metadata:
 spec:
   containers:
   - name: jenkins-calc
-    image: bgrapati/jenkins-calculator:66	  
+    image: nginx:latest  
