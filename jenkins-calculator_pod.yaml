@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-calc
+  labels:
+    app: jenkins-calc
+spec:
+  containers:
+  - name: jenkins-calc
+    image: bgrapati/jenkins-calculator:66	  
